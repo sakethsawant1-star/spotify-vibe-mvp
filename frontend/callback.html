@@ -11,7 +11,8 @@
             if (code) {
                 // Direct redirect to the backend API to handle the exchange
                 // The backend will then redirect back to our frontend with the access_token in the hash
-                window.location.href = `http://localhost:3000/api/auth/callback${window.location.search}`;
+                const apiBase = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' ? 'http://127.0.0.1:3000/api' : 'https://YOUR_BACKEND_URL/api'; // <--- Update this with your Railway URL after deployment
+                window.location.href = `${apiBase}/auth/callback${window.location.search}`;
                 return;
             } else {
                 // Implicit grant check
@@ -23,7 +24,8 @@
             }
             
             // Fallback
-            window.location.href = `http://localhost:3000/api/auth/callback${window.location.search}`;
+            const fallbackApi = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' ? 'http://127.0.0.1:3000/api' : 'https://YOUR_BACKEND_URL/api'; // <--- Update this with your Railway URL after deployment
+            window.location.href = `${fallbackApi}/auth/callback${window.location.search}`;
         };
     </script>
 </head>

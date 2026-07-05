@@ -4,8 +4,8 @@ const router = express.Router();
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-const REDIRECT_URI = 'http://127.0.0.1:8080/callback.html';
-const FRONTEND_URL = 'http://127.0.0.1:8080';
+const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI || 'http://127.0.0.1:8080/callback.html';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://127.0.0.1:8080';
 
 // Step 1: Redirect user to Spotify authorization page
 router.get('/login', (req, res) => {

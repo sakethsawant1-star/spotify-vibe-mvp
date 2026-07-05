@@ -11,7 +11,7 @@
             if (code) {
                 // Direct redirect to the backend API to handle the exchange
                 // The backend will then redirect back to our frontend with the access_token in the hash
-                const apiBase = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' ? 'http://127.0.0.1:3000/api' : 'https://YOUR_BACKEND_URL/api'; // <--- Update this with your Railway URL after deployment
+                const apiBase = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' ? 'http://127.0.0.1:3000/api' : 'https://spotify-vibe-mvp-production.up.railway.app/api';
                 window.location.href = `${apiBase}/auth/callback${window.location.search}`;
                 return;
             } else {
@@ -24,7 +24,7 @@
             }
             
             // Fallback
-            const fallbackApi = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' ? 'http://127.0.0.1:3000/api' : 'https://YOUR_BACKEND_URL/api'; // <--- Update this with your Railway URL after deployment
+            const fallbackApi = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' ? 'http://127.0.0.1:3000/api' : 'https://spotify-vibe-mvp-production.up.railway.app/api';
             window.location.href = `${fallbackApi}/auth/callback${window.location.search}`;
         };
     </script>

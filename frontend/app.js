@@ -1,7 +1,7 @@
 // Dynamically set API_BASE based on where the app is running
 const API_BASE = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' 
     ? 'http://127.0.0.1:3000/api' 
-    : 'https://YOUR_BACKEND_URL/api'; // <--- Update this with your Railway URL after deployment
+    : 'https://spotify-vibe-mvp-production.up.railway.app/api';
 
 // DOM Elements
 const loginView = document.getElementById('login-view');

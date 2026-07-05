@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Logging in...</title>
+    <script>
+        window.onload = async () => {
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code');
+            
+            if (code) {
+                // Direct redirect to the backend API to handle the exchange
+                // The backend will then redirect back to our frontend with the access_token in the hash
+                window.location.href = `http://localhost:3000/api/auth/callback${window.location.search}`;
+                return;
+            } else {
+                // Implicit grant check
+                const hash = window.location.hash;
+                if (hash.includes('access_token')) {
+                    window.location.href = `index.html${hash}`;
+                    return;
+                }
+            }
+            
+            // Fallback
+            window.location.href = `http://localhost:3000/api/auth/callback${window.location.search}`;
+        };
+    </script>
+</head>
+<body style="background:#121212; color:white; font-family:sans-serif; text-align:center; padding-top:50px;">
+    <h2>Completing login...</h2>
+</body>
+</html>

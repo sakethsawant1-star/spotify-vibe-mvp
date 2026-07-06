@@ -36,10 +36,17 @@ Always return valid JSON only.`;
     });
 
     const content = response.data.choices[0].message.content;
-    const parsed = JSON.parse(content);
+    
+    // Strip markdown backticks if present
+    let cleanedContent = content.trim();
+    if (cleanedContent.startsWith('```')) {
+      cleanedContent = cleanedContent.replace(/^```(?:json)?/, '').replace(/```$/, '').trim();
+    }
+    
+    const parsed = JSON.parse(cleanedContent);
     return parsed;
   } catch (error) {
-    console.error('Groq API Error in First Attempt:', error.response ? error.response.data : error.message);
+    console.error('Groq API Error in First Attempt:', error.response ? JSON.stringify(error.response.data) : error.message);
     
     // Fallback/Retry Logic
     console.log('Retrying with a stricter prompt...');
@@ -51,9 +58,15 @@ Always return valid JSON only.`;
           'Content-Type': 'application/json',
         },
       });
-      return JSON.parse(retryResponse.data.choices[0].message.content);
+      const retryContent = retryResponse.data.choices[0].message.content;
+      let cleanedRetry = retryContent.trim();
+      if (cleanedRetry.startsWith('```')) {
+        cleanedRetry = cleanedRetry.replace(/^```(?:json)?/, '').replace(/```$/, '').trim();
+      }
+      return JSON.parse(cleanedRetry);
     } catch (retryError) {
-      console.error('Retry failed. Returning safe defaults.');
+      console.error('Retry failed. Error:', retryError.message);
+      console.error('Returning safe defaults.');
       return {
         curated_tracks: [
           { track: 'Blinding Lights', artist: 'The Weeknd' },

@@ -6,17 +6,17 @@ const extractIntent = async (prompt) => {
     throw new Error('Groq API Key is missing. Please add it to your .env file.');
   }
 
-  const systemPrompt = `You are a music curator AI. Extract structured listening intent from the user's vibe description.
+  const systemPrompt = `You are a Vibe Curator AI. Extract structured listening intent from the user's vibe description and perfectly curate exactly 10 official studio tracks that fit the mood.
+CRITICAL: ENSURE HIGH VARIETY. DO NOT return the same songs every time, even for the same or similar prompts. Pick a fresh, diverse set of tracks across different artists and eras that still fit the vibe perfectly.
 Return ONLY valid JSON with no explanation, no markdown, no preamble:
 {
-  "mood": "one word string",
-  "energy": 0.5,
-  "valence": 0.5,
-  "genres": ["2-3 valid Spotify genre seed strings"],
-  "tempo": "slow or medium or fast",
-  "search_keywords": ["3 keyword strings for Spotify search"]
+  "curated_tracks": [
+    { "track": "Song Title", "artist": "Artist Name" }
+  ],
+  "personalized_message": "A short, empathetic, conversational response directly addressing the user's vibe (e.g. 'Don't worry, you deserve more.' for a breakup vibe)"
 }
-If the prompt is vague: default energy 0.5, valence 0.5, mood neutral.
+The array MUST contain exactly 10 high-quality, real songs. 
+If the prompt is vague, default to a diverse mix of popular chill tracks and a generic friendly message.
 Always return valid JSON only.`;
 
   const requestBody = {
@@ -25,7 +25,7 @@ Always return valid JSON only.`;
       { role: 'system', content: systemPrompt },
       { role: 'user', content: prompt },
     ],
-    temperature: 0.2, // Low temp for more deterministic JSON output
+    temperature: 0.8,
   };
 
   try {

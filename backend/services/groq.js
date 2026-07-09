@@ -68,20 +68,46 @@ Always return valid JSON only.`;
     } catch (retryError) {
       console.error('Retry failed. Error:', retryError.message);
       console.error('Returning safe defaults.');
+      const fallbackPool = [
+        { track: 'Blinding Lights', artist: 'The Weeknd' },
+        { track: 'Levitating', artist: 'Dua Lipa' },
+        { track: 'As It Was', artist: 'Harry Styles' },
+        { track: 'Good Days', artist: 'SZA' },
+        { track: 'Sweater Weather', artist: 'The Neighbourhood' },
+        { track: 'Cruel Summer', artist: 'Taylor Swift' },
+        { track: 'Sunflower', artist: 'Post Malone' },
+        { track: 'Heat Waves', artist: 'Glass Animals' },
+        { track: 'Watermelon Sugar', artist: 'Harry Styles' },
+        { track: 'Peaches', artist: 'Justin Bieber' },
+        { track: 'Starboy', artist: 'The Weeknd' },
+        { track: 'Midnight City', artist: 'M83' },
+        { track: 'Take Care', artist: 'Drake' },
+        { track: 'Bad Guy', artist: 'Billie Eilish' },
+        { track: 'Save Your Tears', artist: 'The Weeknd' },
+        { track: 'Deja Vu', artist: 'Olivia Rodrigo' },
+        { track: 'Kiss Me More', artist: 'Doja Cat' },
+        { track: 'Stay', artist: 'The Kid LAROI' },
+        { track: 'Water', artist: 'Tyla' },
+        { track: 'Vampire', artist: 'Olivia Rodrigo' },
+        { track: 'Anti-Hero', artist: 'Taylor Swift' },
+        { track: 'Kill Bill', artist: 'SZA' },
+        { track: 'Flowers', artist: 'Miley Cyrus' },
+        { track: 'Creepin', artist: 'Metro Boomin' },
+        { track: 'Calm Down', artist: 'Rema' },
+        { track: 'Last Night', artist: 'Morgan Wallen' },
+        { track: 'Fast Car', artist: 'Luke Combs' },
+        { track: 'Paint The Town Red', artist: 'Doja Cat' },
+        { track: 'Greedy', artist: 'Tate McRae' },
+        { track: 'Lovin On Me', artist: 'Jack Harlow' }
+      ];
+      
+      // Shuffle and pick 10
+      const shuffled = fallbackPool.sort(() => 0.5 - Math.random());
+      const selectedTracks = shuffled.slice(0, 10);
+
       return {
-        curated_tracks: [
-          { track: 'Blinding Lights', artist: 'The Weeknd' },
-          { track: 'Levitating', artist: 'Dua Lipa' },
-          { track: 'As It Was', artist: 'Harry Styles' },
-          { track: 'Good Days', artist: 'SZA' },
-          { track: 'Sweater Weather', artist: 'The Neighbourhood' },
-          { track: 'Cruel Summer', artist: 'Taylor Swift' },
-          { track: 'Sunflower', artist: 'Post Malone' },
-          { track: 'Heat Waves', artist: 'Glass Animals' },
-          { track: 'Watermelon Sugar', artist: 'Harry Styles' },
-          { track: 'Peaches', artist: 'Justin Bieber' }
-        ],
-        personalized_message: "Here are some chill pop tracks to keep the good vibes going!"
+        curated_tracks: selectedTracks,
+        personalized_message: "Here are some chill tracks to keep the good vibes going!"
       };
     }
   }

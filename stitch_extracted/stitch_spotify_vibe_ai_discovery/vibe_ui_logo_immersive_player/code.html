@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Spotify Vibe - Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#bccbb9",
+                        "on-primary-fixed": "#002108",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#002108",
+                        "surface-container": "#201f1f",
+                        "inverse-primary": "#006e2d",
+                        "on-error": "#690005",
+                        "primary": "#53e076",
+                        "tertiary-container": "#a0a1a1",
+                        "on-tertiary-container": "#363838",
+                        "tertiary": "#c6c6c7",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#53e076",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary-container": "#004f1d",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-container": "#00cc57",
+                        "secondary-fixed": "#69ff89",
+                        "surface-dim": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary-container": "#004118",
+                        "on-primary-fixed-variant": "#005320",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-background": "#e5e2e1",
+                        "surface": "#131313",
+                        "surface-container-highest": "#353534",
+                        "on-secondary": "#003913",
+                        "on-surface": "#e5e2e1",
+                        "background": "#131313",
+                        "outline-variant": "#3d4a3d",
+                        "outline": "#869585",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#53e076",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#00531f",
+                        "primary-fixed": "#72fe8f",
+                        "secondary": "#3de96f",
+                        "on-primary": "#003914",
+                        "secondary-fixed-dim": "#34e36a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-bright": "#393939",
+                        "on-tertiary": "#2f3131",
+                        "primary-container": "#1db954"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "sidebar-width": "72px",
+                        "stack-sm": "8px",
+                        "card-padding": "16px",
+                        "player-height": "90px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar to match Spotify aesthetic */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border: 3px solid #131313;
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .play-button {
+            transition: all 0.3s ease;
+            transform: translateY(8px);
+            opacity: 0;
+        }
+        .music-card:hover .play-button {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .truncate-2-lines {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen overflow-hidden flex flex-col font-label-md">
+<!-- TopNavBar -->
+<nav class="bg-background/80 backdrop-blur-md flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-50">
+<div class="flex-1 flex items-center gap-4">
+<img alt="Spotify Logo" class="h-8 w-8 rounded-full flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3nTNbjMXc40k9AXVR-nQJg-6XXQ3N8myJlrOIiinouJ8snib-0yUAm2MAiTnMcRUT_t_4g-VLxo0lKtbPTZmjZVq6JktIOLK5xohpqY1kjDfaEDD3fc6IzcCowCnaZzwjKmYy3DTBswOXSMgmnI0QF5zhIVgZxKYCKcrPi1CzLQWSFkPgYu2bNuPN5pHKjjMQVUYQD2M0jizIMcPr0-h6V1f3rpTIbEmUnyrapYK6hBBBd8wqTGyvpn-4q1B5sFYNVg"/>
+<!-- Search bar on left -->
+<div class="relative w-full max-w-xs group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant z-10 group-focus-within:text-on-surface transition-colors" style="font-size: 20px;">search</span>
+<input class="w-full bg-surface-container-high text-on-surface placeholder:text-on-surface-variant font-body-md text-body-md rounded-full py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary-container focus:bg-surface-container-highest transition-all border-none" placeholder="What do you want to play?" type="text"/>
+<!-- Search Popover -->
+<div class="absolute top-full left-0 mt-2 w-[400px] md:w-[480px] bg-[#282828] rounded-xl shadow-2xl p-6 hidden group-focus-within:block z-50">
+<h3 class="font-headline-sm text-headline-sm text-white mb-4">Start browsing</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-[#E13300] h-28 rounded-xl p-4 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform">
+<span class="text-white font-headline-sm text-headline-sm z-10 relative">Music</span>
+<div class="absolute -right-4 -bottom-4 w-16 h-16 bg-black/20 rounded-lg transform rotate-[25deg]"></div>
+</div>
+<div class="bg-[#006450] h-28 rounded-xl p-4 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform">
+<span class="text-white font-headline-sm text-headline-sm z-10 relative">Podcasts</span>
+<div class="absolute -right-4 -bottom-4 w-16 h-16 bg-black/20 rounded-lg transform rotate-[25deg]"></div>
+</div>
+<div class="bg-[#8400E7] h-28 rounded-xl p-4 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform">
+<span class="text-white font-headline-sm text-headline-sm z-10 relative">Live Events</span>
+<div class="absolute -right-4 -bottom-4 w-16 h-16 bg-black/20 rounded-lg transform rotate-[25deg]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="font-headline-md text-headline-md font-bold text-on-surface text-center flex-1">
+            Spotify Vibe
+        </div>
+<div class="flex-1 flex justify-end items-center gap-4">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors scale-95 duration-100 hover:scale-100 hover:bg-surface-variant p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors scale-95 duration-100 hover:scale-100 hover:bg-surface-variant p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface flex flex-col items-center py-stack-md gap-4 w-sidebar-width h-full fixed left-0 top-16 z-40 hidden md:flex border-r border-transparent shadow-none">
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all scale-110 duration-200 flex flex-col items-center justify-center p-3 rounded-xl gap-1 group w-14" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">home</span>
+<span class="font-label-sm text-label-sm hidden">Home</span>
+</a>
+<a class="bg-surface-container-highest text-primary rounded-full hover:bg-surface-container-high transition-all scale-110 duration-200 flex flex-col items-center justify-center p-3 gap-1 group w-14" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-label-sm hidden">Search</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all scale-110 duration-200 flex flex-col items-center justify-center p-3 rounded-xl gap-1 group w-14 mt-4 relative" href="#">
+<div class="w-full h-[1px] bg-outline-variant absolute -top-4 left-0"></div>
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">library_music</span>
+<span class="font-label-sm text-label-sm hidden">Library</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all scale-110 duration-200 flex flex-col items-center justify-center p-3 rounded-xl gap-1 group w-14" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">add</span>
+<span class="font-label-sm text-label-sm hidden">Create</span>
+</a>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-surface-dim pl-0 md:pl-sidebar-width pb-player-height">
+<div class="px-container-padding py-stack-lg max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-stack-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">Search Results</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Top tracks based on your vibe</p>
+</div>
+<button class="bg-transparent border-2 border-primary-container text-primary-container font-headline-sm text-headline-sm px-6 py-2 rounded-full hover:bg-primary-container hover:text-on-primary hover:border-primary-container transition-colors shadow-lg">
+                        Save as Playlist
+                    </button>
+</div>
+<!-- 5x2 Grid of Cards -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-container-padding pb-stack-lg">
+<!-- Card 1 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="A moody, atmospheric photograph of a neon-lit city street at night in Tokyo. High contrast, cinematic lighting with deep blacks and vibrant magenta and cyan neon accents reflecting off wet pavement. The overall tone is modern, rhythmic, and slightly cyberpunk, fitting a dark-mode music interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjF7ATRNjqySh3XyV4hVlP9Gy7LOdfy0k0s1RcQHijhRPcbUsEyu6eiylgnXYt15CRMj0JemzcVS2YjIcGVncF_jVc3sd6fzScGULUsobzrLkl2AXubcn-pmUzqv7bs3_PFLvg5xgOqHDAL0WPuHFGW5m04zYalgK8xUD1Kg0dp-fzDL_DnwbJUgTbQQrtMvPCmSRmzdqrsrDg65EcbgbJhhSK9vW1IeybLxAN7iAPqrtZfhUibsiu"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Neon Nights</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Midnight Synth</p>
+</div>
+<!-- Card 2 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="Abstract 3D rendering of soft, undulating waves in deep emerald and black hues. The lighting is dramatic and directional, creating a sense of depth and fluidity. The aesthetic is extremely minimalist and premium, designed to complement a dark-mode audio application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOdi9LD3e4O3awFuaqggU5_c26P3foUFK5e9csa7bUE6gSOmXrv751tTkqvecFjo44kOLjjPGViuKQ8KuBcwTgRWiM1nkfFIGUh9rzD3sRLnq_8rK_n5HiGnew5ztFdxHr3NVK1duvChFI5uEmCcUwhD1jrhqp_s1EwpKh-N1wOK9IO8YCy9uYVgJP5ApX6dLnWQgLVBiMqDLVIma6-zSX5QDrN7zWWKJqdJvV3-Qz6-xNyvR4Y72U"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Deep House Focus</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Vibe Collective</p>
+</div>
+<!-- Card 3 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="A macro photograph of shattered glass with iridescent reflections against a pitch-black background. Sharp, geometric lines contrast with the chaotic fragmentation. The colors are muted but feature sharp glints of white and green light, evoking a sense of modern, edgy electronica." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1-6JZdgzyL1IGELRRd8svmIyuOO5moEUWLT3AJGRH0LTYQhVUqN7dXgrH89ulMO1qjWoEcbBITpfZ-6UGvEyuTZGkr4OApH06QqcHHY3G8IzBNxfaEwRwryOB-ca89JXEskrUriGHTKFHpYOAHast4q3T_UItaMOk_WHq2pTdkukpMzvkdh3XEN6Epeei8yDh79k0dBJUjIYXdMfvSufFkcn33MZJSF9SX-r6AzBZ2dxzApyrfJUK"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Shattered Glass</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">The Echoes</p>
+</div>
+<!-- Card 4 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="A serene landscape of misty mountains at twilight. The scene is dominated by deep cool grays and blacks, with a sliver of bright silver moonlight breaking through the clouds. The mood is calm, ambient, and immersive, perfectly suited for a relaxed listening playlist cover." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfE8cISxt_eYWVWph4PBnlrY45RHIIBt_eVMcgnJsf65TpgVnXYsJ-0jqlkCLkneyyToB8kuNgi60zoE2Ot7oq6Jfgg6NRxtIsOXJrJ3s8b27P4G2lZO_9BwLkgV736cDvwXl1R7MxZsdxGqfYT6JsTAAY3QIVz70DzcYHSzGImBnUwktnWIjb0ykbLqt6NNG9PzGV96FJ471ke2YXEbRbWHUznt-zsq13N34bvzusiIDylKwYF9Gf"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Ambient Evenings</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Chillout Masters</p>
+</div>
+<!-- Card 5 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col hidden sm:flex">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="Close-up of a vintage analog synthesizer interface bathed in low, dramatic red light against a dark environment. Knobs, sliders, and patch cables are visible, suggesting rich, tactile electronic music production. The aesthetic is retro-futuristic and moody." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEYmcyvdAMQwYIPIpHs0cFwJrVV4nib5mlPYwRRFKC0G37S2PpcX5x1K_ifRkBRyMJ3gY11y_Bmam2n3oG76p0FyPsyXkkVBa0aFbzrKbWLWt_81UcdrvCR36RjsjcesmvKYEv16GB7G7ogkKmiF3ix1i_w9DGW6pKLrcPP9zWU-k8Z2hXnDuRqRG6bA1DlZ-Er7l8xYav4q2OZeMBholJ1veLt5cGvZ2VQFBI4qdp7gb1Jkr3ZF1-"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Analog Dreams</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Synthwave Crew</p>
+</div>
+<!-- Card 6 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col hidden md:flex">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="A dynamic, blurred long-exposure photograph of dancers in a dark club setting. Streaks of bright green and stark white light cut through the deep black background, conveying a sense of high energy and rhythm. The image is highly atmospheric and stylized." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLUlAGE1i2WyG9xDduhYzazS2pd74uG14UWPcP0OkXCJrmbBu00LlFVbyFOnifkLhAzZ3w6kaM_iZn_kXemt3GSGAlo-4ufM-I6mNveohVEkHUWzNgS0s-JxNvkkRjoZESlqahnUj4wmZ1qxjT4sAZQ5TwVJZLtxHASxuQYYmcFhDCAn2SCohMrEPtkwrrnpNWZVqKKqi0Af-uVgd4nASKcAttjlMcubyNhO3T4RM-gq57hzs-KOha"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Club Bangers</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">DJ Vortex</p>
+</div>
+<!-- Card 7 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col hidden md:flex">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="Minimalist graphic design featuring a single, perfect white circle on a textured, very dark charcoal background. The simplicity is striking, relying on subtle gradients and noise to create depth rather than complex forms. Clean, modern, and highly legible." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1tVJpe9nyC4En7EVQAirdZVdDMG7u1RQal9ZZtUkR3qHnp3xYxKD26kQ--bhCZSOGSWcSiBY_Whkn0eVivHXlgfPc9k4ii8hfr95WpahFVFy-jdOJNsrfG2sqb2e_9r6UgRenf0UZC-QaKhhG9wvfpdcv70Lg379AlulY32ow_hGvV4Bc5gi1a4dXlo2bF-mfEPlXhdrhjv3UcfKhxqh4UNVYg0UfbG1q5KkqXKEtrcWntymrev8K"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Pure Minimal</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Less is More</p>
+</div>
+<!-- Card 8 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col hidden lg:flex">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="A gritty, high-contrast black and white photograph of an electric guitar neck. The lighting highlights the strings and frets against deep shadows. The aesthetic is raw, authentic, and slightly worn, perfect for an indie rock or acoustic playlist." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZiI6EgHtQ-tIr-JB5ZuNN3QnniBrpQegq5tDO9mMcDrDfap-h0cFSaCA_vI_voLV35M3zaGp_UP_u2BInXHfGV53knMhwRdRr9qLBqvaBO-h39VxD7hzq7jLc35SukSdOR1dUCWSjYqt4w92Ba1RTZv6CYGUWudJ0BZrOH46uDTFlnqYK5HQqUH0hzP7V-L8riog54CucohL4KD7mCsUU2peq-oxNHzEuGlP9rsgJo63mc3m9kakX"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Indie Essentials</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Underground Sound</p>
+</div>
+<!-- Card 9 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col hidden lg:flex">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="Surreal digital art showing a floating, glowing geometric shape above a desolate, dark landscape. The color palette is restricted to deep blacks, dark purples, and an intense, luminous primary green. The image feels futuristic and expansive, suited for spatial audio or experimental music." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP99yUCS81vD2gXi6gvMYS6RGojL9MYxTiQErpPGG7EbzIiuiJFARFrRXgbhGoRJlsum3pQYx3YCkIpCggzRtDEoYCJF-q1IYPknMOBX_mAsW-zui0mHWbGravkkHIFI_IEa2_vwh0vqodVuaPFISvTYL_uNL_vqVaqkdHYxtYWBWBUUlGPQ2uKpFI2S-HYHauE9jkSpOQktf7k8QhjK4B8LWcMOzjS6mlVXKefzrGCJGEN6awwpOY"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Future Beats</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Sonic Explorers</p>
+</div>
+<!-- Card 10 -->
+<div class="music-card bg-[#181818] p-card-padding rounded-lg hover:bg-[#282828] transition-colors cursor-pointer group flex flex-col hidden lg:flex">
+<div class="relative mb-4 aspect-square w-full rounded-md overflow-hidden shadow-lg">
+<img class="object-cover w-full h-full" data-alt="A vibrant, stylized illustration of a cassette tape radiating sound waves. The lines are crisp and graphic against a dark background. The colors are punchy and saturated, contrasting sharply with the deep blacks, giving a modern pop-art feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy83WgpNrCjiJGwCdOvH5SiVDJA2O_pFs7bf2VlqYcX8oSVsL2mmhw8bnsf4fcTNLEL_IvPoCF5_f35Ln4pjXE0dfkdP8Wg3mZlZ0c0ttoZbDSnRiDpY1voGjVv7ld1JpQ-lUhU3LwKA87dnTZoxvJgPSiVPuvwznjWQj1-8XLMcJZ_-ADF6cvWvO4VEVv-FrmdDXprI7-dm6iQwRh5aD4kELryiqMp9jLvXkQvKLfqMXYKOX0MbF0"/>
+<button class="play-button absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-black rounded-full flex items-center justify-center shadow-[0_8px_16px_rgba(0,0,0,0.5)] hover:bg-[#1ED760] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-[28px] ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Retro Pop</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate mt-1">Throwback Jams</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Active Player Bar (Footer) -->
+<footer class="fixed bottom-0 w-full h-player-height bg-[#181818] border-t border-[#282828] px-container-padding flex items-center justify-between z-50">
+<!-- Left: Track Info -->
+<div class="flex items-center gap-4 w-1/3 min-w-[180px] cursor-pointer group" onclick="document.getElementById('now-playing-fullscreen').classList.remove('hidden')">
+<img class="w-14 h-14 rounded object-cover shadow-md group-hover:opacity-80 transition-opacity" data-alt="Album cover art showing a moody, atmospheric photograph of a neon-lit city street at night in Tokyo. High contrast, cinematic lighting with deep blacks and vibrant magenta and cyan neon accents reflecting off wet pavement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6maCt-of_UdSzC1WTPRXZzaZy4NoX-1bSj1a_AXLgnqhgL8WVjgY8VlgHBsMj3jmtAz4pdySPatoAq6aj2FDrBW7OFltHzbLI5z0AeDqBb2d2qVsk8mEgWjrbW0CXza1gnI9Ju-2fbVl1G9fK0aHzEc3BGuzguQnpOqIRCAgmYiSBsMeXavJaKXoAvX4qazzBuuP0cwewRvFEv1I3arlQ76xuRVwa4sBi_NHrbukA5ZNUdVCP8qUF"/>
+<div class="flex flex-col overflow-hidden">
+<a class="font-body-md text-body-md text-white hover:underline truncate" href="#">Neon Nights</a>
+<a class="font-label-sm text-label-sm text-[#A7A7A7] hover:text-white hover:underline truncate" href="#">Midnight Synth</a>
+</div>
+<button class="text-[#A7A7A7] hover:text-white ml-2">
+<span class="material-symbols-outlined text-[20px]">favorite_border</span>
+</button>
+</div>
+<!-- Center: Playback Controls -->
+<div class="flex flex-col items-center justify-center max-w-2xl w-full px-4 gap-2">
+<div class="flex items-center gap-6">
+<button class="text-[#A7A7A7] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">shuffle</span>
+</button>
+<button class="text-[#A7A7A7] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+</button>
+<button class="text-white hover:scale-105 transition-transform bg-white rounded-full flex items-center justify-center w-8 h-8">
+<span class="material-symbols-outlined text-black text-[24px]" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="text-[#A7A7A7] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+</button>
+<button class="text-primary hover:text-primary-fixed transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]">repeat</span>
+</button>
+</div>
+<div class="flex items-center gap-2 w-full text-[11px] text-[#A7A7A7] font-mono group">
+<span>1:24</span>
+<div class="h-1 bg-[#4d4d4d] rounded-full w-full relative cursor-pointer flex-1">
+<div class="absolute top-0 left-0 h-full bg-white group-hover:bg-primary-container rounded-full w-[45%]"></div>
+<!-- Playhead indicator (hidden by default, shows on hover of the bar) -->
+<div class="absolute top-1/2 -translate-y-1/2 left-[45%] w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow-sm"></div>
+</div>
+<span>3:42</span>
+</div>
+</div>
+<!-- Right: Extra Controls -->
+<div class="flex items-center justify-end gap-3 w-1/3 min-w-[180px] text-[#A7A7A7]">
+<button class="hover:text-white transition-colors hidden sm:block">
+<span class="material-symbols-outlined text-[20px]">lyrics</span>
+</button>
+<button class="hover:text-white transition-colors hidden sm:block">
+<span class="material-symbols-outlined text-[20px]">queue_music</span>
+</button>
+<button class="hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">devices</span>
+</button>
+<div class="flex items-center gap-2 w-24 group">
+<button class="hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+<div class="h-1 bg-[#4d4d4d] rounded-full w-full relative cursor-pointer">
+<div class="absolute top-0 left-0 h-full bg-white group-hover:bg-primary-container rounded-full w-[70%]"></div>
+<div class="absolute top-1/2 -translate-y-1/2 left-[70%] w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow-sm"></div>
+</div>
+</div>
+</div>
+</footer>
+<!-- Full-screen Now Playing Overlay -->
+<div class="fixed inset-0 z-[100] bg-gradient-to-b from-[#8B0000] to-[#2E0000] hidden flex-col transition-opacity duration-300" id="now-playing-fullscreen">
+<div class="flex items-center justify-between p-6">
+<button class="text-white hover:bg-black/20 p-2 rounded-full transition-colors flex items-center justify-center" onclick="document.getElementById('now-playing-fullscreen').classList.add('hidden')">
+<span class="material-symbols-outlined text-[32px]">expand_more</span>
+</button>
+<div class="text-white font-headline-sm text-sm tracking-widest uppercase opacity-80">Playing from Vibe</div>
+<button class="text-white hover:bg-black/20 p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center pb-20">
+<img alt="Neon Nights Album Cover" class="w-[60vh] max-w-[500px] aspect-square rounded-lg shadow-[0_25px_50px_rgba(0,0,0,0.7)] mb-12 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6maCt-of_UdSzC1WTPRXZzaZy4NoX-1bSj1a_AXLgnqhgL8WVjgY8VlgHBsMj3jmtAz4pdySPatoAq6aj2FDrBW7OFltHzbLI5z0AeDqBb2d2qVsk8mEgWjrbW0CXza1gnI9Ju-2fbVl1G9fK0aHzEc3BGuzguQnpOqIRCAgmYiSBsMeXavJaKXoAvX4qazzBuuP0cwewRvFEv1I3arlQ76xuRVwa4sBi_NHrbukA5ZNUdVCP8qUF"/>
+<div class="w-[60vh] max-w-[500px] flex justify-between items-end mb-8">
+<div>
+<h2 class="font-display-lg text-4xl text-white font-bold mb-2">Neon Nights</h2>
+<p class="font-headline-md text-xl text-[#ffffffb3]">Midnight Synth</p>
+</div>
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="w-[60vh] max-w-[500px]">
+<div class="flex items-center gap-3 w-full text-sm text-[#ffffffb3] font-mono group mb-8">
+<span>1:24</span>
+<div class="h-2 bg-[#ffffff40] rounded-full w-full relative cursor-pointer flex-1">
+<div class="absolute top-0 left-0 h-full bg-white rounded-full w-[45%]"></div>
+<div class="absolute top-1/2 -translate-y-1/2 left-[45%] w-4 h-4 bg-white rounded-full shadow-md hover:scale-110 transition-transform"></div>
+</div>
+<span>3:42</span>
+</div>
+<div class="flex items-center justify-between w-full px-2">
+<button class="text-[#ffffffb3] hover:text-white transition-colors"><span class="material-symbols-outlined text-[28px]">shuffle</span></button>
+<button class="text-white hover:text-[#cccccc] transition-colors"><span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">skip_previous</span></button>
+<button class="text-black bg-white hover:scale-105 transition-transform rounded-full flex items-center justify-center w-20 h-20"><span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">pause</span></button>
+<button class="text-white hover:text-[#cccccc] transition-colors"><span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">skip_next</span></button>
+<button class="text-primary hover:text-[#53e076] transition-colors"><span class="material-symbols-outlined text-[28px]">repeat</span></button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

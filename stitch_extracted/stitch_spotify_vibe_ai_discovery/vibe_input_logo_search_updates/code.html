@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Spotify Vibe - Describe Your Vibe</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Style Guidance -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#bccbb9",
+                    "on-primary-fixed": "#002108",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed": "#002108",
+                    "surface-container": "#201f1f",
+                    "inverse-primary": "#006e2d",
+                    "on-error": "#690005",
+                    "primary": "#53e076",
+                    "tertiary-container": "#a0a1a1",
+                    "on-tertiary-container": "#363838",
+                    "tertiary": "#c6c6c7",
+                    "inverse-on-surface": "#313030",
+                    "surface-tint": "#53e076",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-secondary-container": "#004f1d",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary-container": "#00cc57",
+                    "secondary-fixed": "#69ff89",
+                    "surface-dim": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "on-primary-container": "#004118",
+                    "on-primary-fixed-variant": "#005320",
+                    "surface-variant": "#353534",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-background": "#e5e2e1",
+                    "surface": "#131313",
+                    "surface-container-highest": "#353534",
+                    "on-secondary": "#003913",
+                    "on-surface": "#e5e2e1",
+                    "background": "#131313",
+                    "outline-variant": "#3d4a3d",
+                    "outline": "#869585",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#53e076",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed-variant": "#00531f",
+                    "primary-fixed": "#72fe8f",
+                    "secondary": "#3de96f",
+                    "on-primary": "#003914",
+                    "secondary-fixed-dim": "#34e36a",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-bright": "#393939",
+                    "on-tertiary": "#2f3131",
+                    "primary-container": "#1db954"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "sidebar-width": "72px",
+                    "stack-sm": "8px",
+                    "card-padding": "16px",
+                    "player-height": "90px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                    "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                    "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                    "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                    "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                    "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Base typography setting */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Fallback for background */
+            color: #e5e2e1;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353534;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a0a1a1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-screen overflow-hidden flex selection:bg-primary-container selection:text-white">
+<!-- JSON Component: SideNavBar -->
+<!-- Content: Home, Search, Library, Create -->
+<!-- Active Tab Logic: User is on a "Search/Input" Vibe screen -> "Search" is active -->
+<nav class="flex flex-col items-center py-stack-md gap-4 w-sidebar-width h-screen fixed left-0 top-0 z-40 bg-surface flat no shadows">
+<div class="hidden font-headline-md text-headline-md font-bold text-on-surface mb-4">Spotify Vibe</div>
+<!-- Tab: Home -->
+<button aria-label="Home" class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all scale-110 duration-200 group rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+</button>
+<!-- Tab: Search (Active) -->
+<button aria-label="Search" class="w-12 h-12 flex items-center justify-center bg-surface-container-highest text-primary rounded-full hover:bg-surface-container-high transition-all scale-110 duration-200 group">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+</button>
+<!-- Tab: Library -->
+<button aria-label="Library" class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all scale-110 duration-200 group rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_music</span>
+</button>
+<!-- Tab: Create -->
+<button aria-label="Create" class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all scale-110 duration-200 group rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add</span>
+</button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-sidebar-width flex-1 flex flex-col h-full relative overflow-y-auto pb-player-height">
+<!-- JSON Component: TopNavBar -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-50 bg-background/80 backdrop-blur-md flat no shadows">
+<div class="flex items-center gap-4">
+<img alt="Spotify Vibe Logo" class="w-8 h-8 object-contain rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUFrIwUu8KxXCjj6xTH16N6G-xIFFnW4KcldrWBeGrOHZa_f1UV07IUtKx96gdMfKeGJy9-KYl7ld0mK5s2qtvwA3V8HgbIxob9hMSJMhovV_lG8GmzfLFseoIY9Av1Jg1WhgEuEGHeXYOlWAZxH9mUABPWZEH557o1HCVWO05rZ3B9yyzHAqkaLIcSMhO8AiKuii-KCA2-ctsy4WbWkSQ_nWUuqUqZa6mOcPDN93pKAvTNluxHnm8tKsTYoetH0wfZA"/>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Spotify Vibe</h1>
+<!-- Search Bar (on_left as per JSON, but we have a main search below. Keeping a small contextual one here or just the layout slot) -->
+<div class="hidden md:flex items-center bg-surface-container-high rounded-full px-4 py-2 opacity-0 pointer-events-none">
+<!-- Invisible top search to balance flex layout per standard app if needed, 
+                         but prompt requests large central one. Keeping nav clean. -->
+</div>
+</div>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-stack-sm font-body-md text-body-md">
+<button aria-label="notifications" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors scale-95 duration-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="account_circle" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors scale-95 duration-100">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Workspace Canvas -->
+<div class="px-container-padding py-stack-lg flex flex-col">
+<!-- Hero Input Section -->
+<section class="flex flex-col items-center justify-center w-full max-w-4xl mx-auto py-12 text-center">
+<!-- Large Central Input -->
+<div class="relative w-full max-w-2xl mb-stack-md group z-20">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-on-surface-variant text-2xl group-focus-within:text-primary transition-colors">auto_awesome</span>
+<input autocomplete="off" class="w-full bg-surface-container-high border-none text-on-surface placeholder-on-surface-variant font-headline-sm text-headline-sm rounded-full py-5 pl-16 pr-8 shadow-2xl focus:ring-2 focus:ring-primary focus:outline-none transition-all placeholder:font-normal" placeholder="Describe your vibe... e.g. late night drive, melancholic but calm" type="text"/>
+</div>
+<div class="absolute top-full left-0 w-full mt-4 bg-surface-container-highest rounded-2xl p-6 shadow-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 z-30">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-4 text-left">Start browsing</h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-[#E13300] h-28 rounded-xl p-4 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform">
+<span class="font-headline-sm text-headline-sm font-bold text-white relative z-10">Music</span>
+</div>
+<div class="bg-[#006450] h-28 rounded-xl p-4 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform">
+<span class="font-headline-sm text-headline-sm font-bold text-white relative z-10">Podcasts</span>
+</div>
+<div class="bg-[#8400E7] h-28 rounded-xl p-4 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform">
+<span class="font-headline-sm text-headline-sm font-bold text-white relative z-10">Live Events</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Vibe Chips -->
+<div class="flex flex-wrap items-center justify-center gap-stack-sm mb-stack-lg relative z-10">
+<button class="bg-surface-container hover:bg-surface-container-high border border-transparent hover:border-outline-variant text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-5 py-2.5 rounded-full transition-all cursor-pointer">
+                        sunday morning slow
+                    </button>
+<button class="bg-surface-container hover:bg-surface-container-high border border-transparent hover:border-outline-variant text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-5 py-2.5 rounded-full transition-all cursor-pointer">
+                        coding at midnight
+                    </button>
+<button class="bg-surface-container hover:bg-surface-container-high border border-transparent hover:border-outline-variant text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-5 py-2.5 rounded-full transition-all cursor-pointer">
+                        pre-workout energy
+                    </button>
+</div>
+<!-- Primary CTA -->
+<button class="bg-primary-container hover:bg-primary text-surface-container-lowest font-headline-sm text-headline-sm px-10 py-4 rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_8px_16px_rgba(29,185,84,0.3)] relative z-10">
+                    Find My Vibe
+                </button>
+</section>
+<!-- Generated Playlist Content -->
+<section class="mt-stack-lg pb-12">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mb-stack-md">Your Vibe Playlist</h2>
+<!-- 5x2 Grid of Music Cards -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-card-padding">
+<!-- Card 1 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A moody, low-light photograph of a city street at midnight in the rain, neon reflections on wet asphalt. The color palette is dominated by deep cool blues and shadows, with stark, solitary lighting conveying a melancholic yet calm aesthetic. Perfect for a late night drive playlist cover art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzbyeTApgoWW8DpVu1zZju36LW0KSYAqdG6CMsOHIgAyf4nSo9jb8tGCpDX9kE2qO7DugSnSJbQCNl3zi5ssw9zSz4zCi2px4JXLxWx4ffyWOCfDRfnTQoeBmJHBzvAqnfpnJTm0776Xzro_nA_STG3MxLyrm_0zGdH6ygjS82luaLJcNdR_xnznYOZ3_9R4GpiBzGZqj5zZF3Elu-A1eaj1D2DGmWnE6CpZsfP4AVIVVBf2TA0hPm"/>
+<!-- Play Button Hover -->
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Midnight City</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">M83</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A serene, minimalist digital art piece showing a vast, dark ocean reflecting a solitary, glowing white moon. The aesthetic is extremely clean and atmospheric, utilizing primarily deep black and charcoal gray tones with a single, sharp light source. The mood is deeply calming and solitary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR3euv5H-Q54W5-zM_7Ppt6zQQMNPPRW-HqF1die-R4QgIoKAaUVMFCDyKrPN3XPFHVRlpSMRrYdx1-B1BetnRt6NXDLmJE8SivdYj_FML3fujXhaUzCGeqG6oNFNlLTqsxjf7G2Rp4CykNq2XMknb8zl7lJnC7N-Z5YQYd7VKAHLEhR7zQ3LjT4S61xAI7Sx1Iv9_i7TV4XNvCjMSvv464bWFcUlQD55Mok9jrkC_SFaWJt26PJll"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Nightcall</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Kavinsky</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Abstract 3D rendering of smooth, dark glass spheres floating in a void. Soft, diffused purple and blue edge lighting highlights the curves of the geometry against a pitch-black background. The visual style is highly polished, modern, and soothing, evoking a state of deep focus and flow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyF0a78Mpxkcys5sJhnanW_rC43WeUAfbzFo6MI6mUpaHEccZsRfryD4VFTvCRAdZyvH6yFWXCb8w9Jw8gUs7WbSBP5-fgJRmRSQTaAJp2CH2bkxlvZKktiW3D5qQxtpNCZeMmXM8GCleZpbKvCaXxb2--gRv8gz7Xp69GZqMw-TrjM9PMQ30bBzuXC2RH_LJlH9JtEp7_c4CBKKWQGm03b7yiNoBNUBc5a_Q-kBrIOEmJj4CRHuuh"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Resonance</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">HOME</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A cinematic shot of a lone car's dashboard at night, out of focus streetlights creating bokeh effects through the rain-streaked windshield. Dark, low-contrast, heavily atmospheric with deep charcoal blacks and subtle amber glow. The vibe is introspective and quiet, suited for a late-night drive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDftbv_vtWPodKRezeR5K-K6b_6I0DOyYG-n6LDZ8LCJ96s0SOWU7QjPMO4JWIkpZrc4yRK8ty6DBAQ5aEXDsZ8jF5XztvyQLjV_BvS2d9xCPqfg-q_GUj7Tf0H1EG_GXj-cVs6mDIW2ZcABI7YZd8QHDVs-6T0DvfmqgzMhgoWzyUbB3ttMD-3-jBHDz4bjsIu3vFj6axDVzg-Zn1j76uy_7Tw-PLQcG3S8g1YRUNL0egGSIuYAxhU"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">A Real Hero</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">College, Electric Youth</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Minimalist graphic design featuring a stark black background intersected by a single, thin, glowing cyan laser line. The artwork relies on heavy negative space and absolute contrast to create a sleek, futuristic, and highly concentrated mood. Ideal for a cyber-themed electronic music track." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2IwGrIuw5YlAz-MDx-VZZvUQgMvvP9BtrDk8v0HPUaCYCuvT4zy1_nvgUi8jyRb7wAS_Qwcn0U_Y9mGDqxdl32YTalFtB-HSQuvvJ_gB45SCi6ckssz84HPTFuPjdNKiAoyg-in_1AZra7B4q7XGVFWV8_7vp5RoKPCyV8to_vg85m565KJP8X7yIMe7ofIMrr0WitZ-tkwKeUfGrdwsOdcALXzlKH4OtPMcOy_feAZv77INASZKj"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Tech Noir</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Gunship</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A shadowy silhouette of a forest skyline against a deep indigo night sky. The image is mostly dark, utilizing a subtle gradient from pitch black to rich, dark blue. The aesthetic is organic yet mysterious and quiet, perfect for an acoustic or ambient chill track." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA2RQFZdcIwfm5sx3p0ogRGHn-zoPW9giINtOMf7SzosR2hlyJtc2HONwlJIEIQObdG2ciEljTgyuvc7_4dLYC5wlYzjKvGs-qNvRSeVeRtc__B8mlCWlq77G6ZTfd8ex010ADdvgK_8uY-PoNk1GXHNNhDJ6vnEipnbVr1zMatJON6L11J2N7wWlb3i55QPHaFKj1zZzxN55VEHmuKh2LzbyaS_jMrtpECr_DJRV3eCNuY5RiSS6S"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Intro</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">The xx</p>
+</div>
+<!-- Card 7 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A macroscopic, extreme close-up of dark grey volcanic rock, emphasizing its rough, matte texture. Soft, diffused lighting prevents harsh shadows, creating a uniform, moody gray palette. The image feels solid, grounded, and intensely minimalist, suitable for a lo-fi beats playlist." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdBhoLZSwYefdkVjWD8KWmYBnq6Y7zckwglndSYdHZ1UomDrJ8SsYacixII0TXZ54fLBOoeav-kaNpdjSM_dqo-5K7PFoOjtNHMKNKztOb2TYD-SspBbKsKpvxUtUEYQIPYjxqIjqJreOvcAjDag5m5pgEB1fZuYAcO9Fss-TIxV81DHnyzI-YoYjXRlHggt6esiJLE2Re0bUHspMtZmebbNTLpKiLSEX46L4pZTrGeUxkwEMMrRj_"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Weightless</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Marconi Union</p>
+</div>
+<!-- Card 8 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A blurred, long-exposure shot of distant headlights on a lonely highway at night. The streaks of dim orange light cut through a heavy, dark gray fog. The entire composition is subdued and lacks sharp details, generating a feeling of continuous, calm motion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATZgSpKSBpWX8nodEEbAZ11XstLx4XnHHYsyFTmCmY1QDYdsV1hYMe5ep1j28q1Tlj2rZZtuaX2NSASGeXjJcQghJLamMfAysHB12TVqKt40xzJcRfKSONmvgP-dMDgTJUS6QyXSpvZbtz8E_9OWQmupFzeH-rwC0rKSmtTiuft0-03YT1lSfc9YPfSflPinyyzT97T-mROogch2VDeOGhQgYp1c2q1j285qc00Pk9rdcr8WuIiVbd"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Drive</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Glades</p>
+</div>
+<!-- Card 9 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Abstract fluid art featuring slow-moving, dark metallic silver and black paints mixing together. The glossy surface reflects minimal light, creating deep, undulating shadows and a sensation of heavy, liquid calm. A sophisticated and elegant aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkt49g72jFIfSqu2wrputfAB9fQZ_bJFxpUhmzLBUWr4GuArIX1DaqcDDqChePbjLM0C7GaWoemLJ-s0H9WozIozammuRdspBAafrmXihI7csCHTBYyAaqivvmIYHHYA5iXJ1YJzgwuo3VFJwqsegoQ1KqGrKhLrhxAnhaI6PP0_YS1oVu9B3eHK-FBf_WQc7yksIxLw_MJGKQQKLXaobtO2jN1Vd_9cFjPlL-zd9hi-khEGfqtqO8"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Daydreaming</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Radiohead</p>
+</div>
+<!-- Card 10 -->
+<div class="bg-surface hover:bg-surface-container-high p-card-padding rounded-lg transition-colors group cursor-pointer flex flex-col relative">
+<div class="w-full aspect-square bg-surface-container rounded-md mb-4 relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A vintage, grainy photograph of a cassette tape resting on a dark wooden table illuminated by a single, warm desk lamp. The surrounding room fades off completely into black. The aesthetic is nostalgic, cozy, and intimate, utilizing deep shadows and a muted color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp57te8Ggngnnc2Wkwojvr1ErAOszIMPn7jPmwdZ98nK0hBHd6TPIte8D4Ach4fimqf8FFTSjSbfao8m_8WyzH9Cxo9uFnDbvDib96KdFuyKfV3LJ9qDuG5d6ODuRsdNqLjOP8T1T2UmLcknndM6kgxKSq6rEjl1IAxJlahV0Ta8kntEe7f850WnzTHBYQLm41T-RsCYlfPnczaf9Pz_4wXAwyJrhM81n-Cv0oV_EkHvy2LwpYEuBZ"/>
+<div class="absolute bottom-2 right-2 w-12 h-12 bg-primary-container text-surface-container-lowest rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface truncate mb-1">Slow Dancing in a Burning Room</h3>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">John Mayer</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- JSON Component: Footer (Player Bar) -->
+<!-- Content: Copyright, Links. Empty/Inactive state requested. -->
+<footer class="fixed bottom-0 w-full h-player-height px-container-padding flex items-center justify-between z-50 bg-surface-container border-t border-outline-variant shadow-lg ml-sidebar-width" style="width: calc(100% - 72px);">
+<!-- Inactive state of player (Left side) -->
+<div class="flex items-center gap-4 opacity-50 w-1/3">
+<div class="w-14 h-14 bg-surface-container-high rounded-md"></div>
+<div class="flex flex-col gap-1">
+<div class="h-3 w-24 bg-surface-container-high rounded"></div>
+<div class="h-2 w-16 bg-surface-container-high rounded"></div>
+</div>
+</div>
+<!-- Inactive Center Controls -->
+<div class="flex flex-col items-center justify-center w-1/3 opacity-50 gap-2">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface">shuffle</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface">skip_previous</span>
+<div class="w-8 h-8 rounded-full bg-on-surface-variant flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-surface-container" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface">skip_next</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface">repeat</span>
+</div>
+<div class="w-full max-w-md flex items-center gap-2">
+<span class="text-[10px] text-on-surface-variant font-label-sm">0:00</span>
+<div class="flex-1 h-1 bg-[#4d4d4d] rounded-full"></div>
+<span class="text-[10px] text-on-surface-variant font-label-sm">0:00</span>
+</div>
+</div>
+<!-- Right Side Nav/Links from JSON -->
+<div class="flex items-center justify-end gap-4 w-1/3 font-body-md text-body-md text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-on-surface transition-colors text-[20px]" title="Player Controls">mic</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-on-surface transition-colors text-[20px]" title="Queue">queue_music</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-on-surface transition-colors text-[20px]" title="Connect to a device">devices</span>
+<div class="flex items-center gap-2 w-24">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+<div class="flex-1 h-1 bg-[#4d4d4d] rounded-full group hover:bg-primary transition-colors cursor-pointer relative">
+<div class="absolute inset-0 bg-white rounded-full w-1/2 group-hover:bg-primary"></div>
+</div>
+</div>
+<span class="text-[10px] ml-4 font-label-sm opacity-50">© 2024 Spotify Vibe</span>
+</div>
+</footer>
+</body></html>

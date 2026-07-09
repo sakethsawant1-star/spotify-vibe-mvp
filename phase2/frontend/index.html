@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Prompt</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Inter', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        button {
+            background-color: #1DB954;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #1ed760;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vibe Prompt</h1>
+    <div id="login-section">
+        <p>Login to discover music that matches your vibe.</p>
+        <button id="login-btn">Login with Spotify</button>
+    </div>
+    
+    <div id="app-section" style="display: none;">
+        <p>You are logged in!</p>
+        <!-- Vibe input will go here in Phase 6 -->
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        document.getElementById('login-btn').addEventListener('click', () => {
+            window.location.href = `${CONFIG.BACKEND_URL}/api/auth/login`;
+        });
+
+        // Check if user is already logged in
+        const token = sessionStorage.getItem('spotify_access_token');
+        if (token) {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('app-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -18,49 +18,54 @@ router.get('/', async (req, res, next) => {
   const accessToken = authHeader.split(' ')[1];
 
   try {
-    // Fetch Top Tracks
-    const topTracksResponse = await axios.get(`${SPOTIFY_API_BASE}/me/top/tracks?limit=8`, {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    }).catch((err) => {
-      if (err.response?.status === 401) {
-        const authErr = new Error('Spotify Token Expired');
-        authErr.statusCode = 401;
-        throw authErr;
-      }
-      console.error('Spotify API Error on top tracks:', err.response?.status, err.response?.data);
-      return { data: { items: [] } };
-    }); // Fallback if no top tracks
+    let topTracks = [];
+    let playlists = [];
 
-    const topTracks = topTracksResponse.data.items ? topTracksResponse.data.items.map(track => ({
-      id: track.id,
-      name: track.name,
-      artist: track.artists[0]?.name || 'Unknown Artist',
-      albumArt: track.album.images[0]?.url || '',
-      previewUrl: track.preview_url,
-      spotifyUrl: track.external_urls?.spotify || '',
-      uri: track.uri,
-    })) : [];
+    if (accessToken && accessToken !== 'demo_token') {
+      // Fetch Top Tracks
+      const topTracksResponse = await axios.get(`${SPOTIFY_API_BASE}/me/top/tracks?limit=8`, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      }).catch((err) => {
+        if (err.response?.status === 401) {
+          const authErr = new Error('Spotify Token Expired');
+          authErr.statusCode = 401;
+          throw authErr;
+        }
+        console.error('Spotify API Error on top tracks:', err.response?.status, err.response?.data);
+        return { data: { items: [] } };
+      });
 
-    // Fetch Featured Playlists
-    const playlistsResponse = await axios.get(`${SPOTIFY_API_BASE}/browse/featured-playlists?limit=6`, {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    }).catch((err) => {
-      if (err.response?.status === 401) {
-        const authErr = new Error('Spotify Token Expired');
-        authErr.statusCode = 401;
-        throw authErr;
-      }
-      console.error('Spotify API Error on featured playlists:', err.response?.status, err.response?.data);
-      return { data: { playlists: { items: [] } } };
-    });
+      topTracks = topTracksResponse.data.items ? topTracksResponse.data.items.map(track => ({
+        id: track.id,
+        name: track.name,
+        artist: track.artists[0]?.name || 'Unknown Artist',
+        albumArt: track.album.images[0]?.url || '',
+        previewUrl: track.preview_url,
+        spotifyUrl: track.external_urls?.spotify || '',
+        uri: track.uri,
+      })) : [];
 
-    const playlists = playlistsResponse.data.playlists?.items ? playlistsResponse.data.playlists.items.map(pl => ({
-      id: pl.id,
-      name: pl.name,
-      description: pl.description,
-      image: pl.images[0]?.url || '',
-      spotifyUrl: pl.external_urls?.spotify || '',
-    })) : [];
+      // Fetch Featured Playlists
+      const playlistsResponse = await axios.get(`${SPOTIFY_API_BASE}/browse/featured-playlists?limit=6`, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      }).catch((err) => {
+        if (err.response?.status === 401) {
+          const authErr = new Error('Spotify Token Expired');
+          authErr.statusCode = 401;
+          throw authErr;
+        }
+        console.error('Spotify API Error on featured playlists:', err.response?.status, err.response?.data);
+        return { data: { playlists: { items: [] } } };
+      });
+
+      playlists = playlistsResponse.data.playlists?.items ? playlistsResponse.data.playlists.items.map(pl => ({
+        id: pl.id,
+        name: pl.name,
+        description: pl.description,
+        image: pl.images[0]?.url || '',
+        spotifyUrl: pl.external_urls?.spotify || '',
+      })) : [];
+    }
 
     const trackPool = [
       { id: '1', name: 'Blinding Lights', artist: 'The Weeknd', albumArt: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=300&h=300', previewUrl: null, spotifyUrl: 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b', uri: 'spotify:track:0VjIjW4GlUZAMYd2vXMi3b' },

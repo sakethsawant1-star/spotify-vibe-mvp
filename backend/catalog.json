@@ -1,0 +1,182 @@
+{
+  "midnight city": {
+    "id": "1674217008",
+    "name": "Midnight City",
+    "artist": "M83",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/73/c6/ed/73c6edb3-924c-27f0-28f8-1470906d6780/cover.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/74/a2/d3/74a2d361-c6bb-9880-a8d1-d999833d2891/mzaf_15783493292556356203.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Midnight%20City%20M83",
+    "uri": "spotify:track:1674217008"
+  },
+  "starboy": {
+    "id": "1440870375",
+    "name": "Starboy (feat. Daft Punk)",
+    "artist": "The Weeknd",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b5/92/bb/b592bb72-52e3-e756-9b26-9f56d08f47ab/16UMGIM67864.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/11/71/d6/1171d6ad-3c96-e027-2af6-58028426588c/mzaf_15137631797407745471.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Starboy%20The%20Weeknd",
+    "uri": "spotify:track:1440870375"
+  },
+  "nightcall": {
+    "id": "1442447970",
+    "name": "Nightcall",
+    "artist": "Kavinsky",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c1/2d/fe/c12dfe8f-cdf6-e179-d69a-8ec35f760266/00602537248681.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d2/45/fb/d245fbf9-8570-fdc0-5e6b-aa528c130486/mzaf_11947081694159530687.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Nightcall%20Kavinsky",
+    "uri": "spotify:track:1442447970"
+  },
+  "sweater weather": {
+    "id": "635016640",
+    "name": "Sweater Weather",
+    "artist": "The Neighbourhood",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/28/71/00/287100fb-5c31-0195-5343-e6b3625886d0/886443969834.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8c/37/20/8c372047-2727-8054-9411-0e4867643dd8/mzaf_10169659262182214119.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Sweater%20Weather%20The%20Neighbourhood",
+    "uri": "spotify:track:635016640"
+  },
+  "blinding lights": {
+    "id": "1542842761",
+    "name": "Blinding Lights (Remix)",
+    "artist": "The Weeknd & ROSALÍA",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/61/e7/3f/61e73f94-018d-5f50-50ec-8521952bc72e/20UM1IM11629.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/12/73/ca/1273ca46-233a-5331-189b-25ac1d656533/mzaf_976341070785891411.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Blinding%20Lights%20The%20Weeknd",
+    "uri": "spotify:track:1542842761"
+  },
+  "instant crush": {
+    "id": "617154362",
+    "name": "Instant Crush",
+    "artist": "Daft Punk & Julian Casablancas",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e8/43/5f/e8435ffa-b6b9-b171-40ab-4ff3959ab661/886443919266.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/dc/1e/c2/dc1ec21b-96a0-470c-ee89-2b09346fa847/mzaf_7827098614541126525.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Instant%20Crush%20Daft%20Punk",
+    "uri": "spotify:track:617154362"
+  },
+  "good days": {
+    "id": "1658650802",
+    "name": "Good Days",
+    "artist": "SZA",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/62/93/13/6293132e-20ff-67ab-3d1f-96bb6797a6ba/196589564955.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9b/32/fe/9b32fec3-fbfb-db0f-3dcf-bb089d412f23/mzaf_15200324731067771849.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Good%20Days%20SZA",
+    "uri": "spotify:track:1658650802"
+  },
+  "as it was": {
+    "id": "1615585008",
+    "name": "As It Was",
+    "artist": "Harry Styles",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/2a/19/fb/2a19fb85-2f70-9e44-f2a9-82abe679b88e/886449990061.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/67/10/16/67101606-3869-ca44-6c03-e13d6322cb51/mzaf_1135399237022217274.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/As%20It%20Was%20Harry%20Styles",
+    "uri": "spotify:track:1615585008"
+  },
+  "sunflower": {
+    "id": "1445949267",
+    "name": "Sunflower (Spider-Man: Into the Spider-Verse)",
+    "artist": "Post Malone & Swae Lee",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/4b/30/2c/4b302cb6-7a14-5464-4e97-0577e9d0be49/18UMGIM82277.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/98/f0/d6/98f0d67e-f8bf-762d-cac7-1c6b3b6b35dd/mzaf_4543283896248560946.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Sunflower%20Post%20Malone",
+    "uri": "spotify:track:1445949267"
+  },
+  "golden hour": {
+    "id": "1640157165",
+    "name": "golden hour",
+    "artist": "JVKE",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8d/1a/7b/8d1a7b44-316f-7c7f-4380-935673fb697a/5056167175650.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/30/02/8c/30028c8a-a125-5466-bcc6-27a83b1c0135/mzaf_16911571635366913039.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Golden%20Hour%20JVKE",
+    "uri": "spotify:track:1640157165"
+  },
+  "levitating": {
+    "id": "1538003843",
+    "name": "Levitating",
+    "artist": "Dua Lipa",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/6c/11/d6/6c11d681-aa3a-d59e-4c2e-f77e181026ab/190295092665.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/59/dc/4d/59dc4dda-93ff-8f1c-c536-f005f6ea6af5/mzaf_3066686759813252385.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Levitating%20Dua%20Lipa",
+    "uri": "spotify:track:1538003843"
+  },
+  "paint the town red": {
+    "id": "1699832214",
+    "name": "Paint The Town Red",
+    "artist": "Doja Cat",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/05/a1/62/05a162ca-d0f8-462a-a033-474a019e506f/196871274111.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/3e/52/d53e52e6-8b99-ed81-59f4-7496f18e80cb/mzaf_16754470647437213840.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Paint%20The%20Town%20Red%20Doja%20Cat",
+    "uri": "spotify:track:1699832214"
+  },
+  "greedy": {
+    "id": "1719661252",
+    "name": "greedy",
+    "artist": "Tate McRae",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/21/4a/c2/214ac20c-a66c-84a1-e357-f7e60b1932ca/196871542661.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8d/e0/e2/8de0e2ae-f88c-5056-c07d-fe04acbc1d58/mzaf_1974309867621262359.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Greedy%20Tate%20McRae",
+    "uri": "spotify:track:1719661252"
+  },
+  "till i collapse": {
+    "id": "1440821843",
+    "name": "'Till I Collapse (feat. Nate Dogg)",
+    "artist": "Eminem",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/dd/5c/e6/dd5ce621-f7d2-f767-7a08-e7a7eaa7870b/00602537526994.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cf/8f/f1/cf8ff198-b736-395b-6b3f-877048ea5384/mzaf_11538452963444220646.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Till%20I%20Collapse%20Eminem",
+    "uri": "spotify:track:1440821843"
+  },
+  "believer": {
+    "id": "1411628233",
+    "name": "Believer",
+    "artist": "Imagine Dragons",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/11/7a/b8/117ab805-6811-8929-18b9-0fad7baf0c25/17UMGIM98210.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c0/3f/36/c03f367a-b66b-fd0a-a54c-30f8250c4410/mzaf_12768434238801682952.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Believer%20Imagine%20Dragons",
+    "uri": "spotify:track:1411628233"
+  },
+  "glimpse of us": {
+    "id": "1776748883",
+    "name": "Glimpse of Us",
+    "artist": "Joji",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d0/2a/43/d02a433a-3ab8-9a94-b07d-1dc599b64966/93624864387.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0c/53/c2/0c53c240-300a-5ddf-fc86-3a54e1b73a78/mzaf_13555682862214742934.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Glimpse%20of%20Us%20Joji",
+    "uri": "spotify:track:1776748883"
+  },
+  "drivers license": {
+    "id": "1560735480",
+    "name": "drivers license",
+    "artist": "Olivia Rodrigo",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/02/ed/8c/02ed8cab-c089-2fdd-7ce6-ab334a9a4e19/21UMGIM26093.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/36/62/61/366261be-0996-d73d-de6f-03417867c800/mzaf_8201528327761821135.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/drivers%20license%20Olivia%20Rodrigo",
+    "uri": "spotify:track:1560735480"
+  },
+  "someone you loved": {
+    "id": "1452619054",
+    "name": "Someone You Loved",
+    "artist": "Lewis Capaldi",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/92/d7/8f/92d78fb1-df3d-049e-c81d-7022808b151f/19UMGIM02973.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e5/c8/17/e5c817e2-7830-091f-8686-d6276d5beaeb/mzaf_5586826958480073790.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Someone%20You%20Loved%20Lewis%20Capaldi",
+    "uri": "spotify:track:1452619054"
+  },
+  "another love": {
+    "id": "1621274683",
+    "name": "Another Love (Tiësto Remix)",
+    "artist": "Tom Odell & Tiësto",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/20/ac/68/20ac6879-1846-84df-7189-d8745c1bef93/196589135537.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2a/0d/8d/2a0d8d48-f74a-236e-ec23-24a958f5649d/mzaf_16143782915340700495.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Another%20Love%20Tom%20Odell",
+    "uri": "spotify:track:1621274683"
+  },
+  "heat waves": {
+    "id": "1508562516",
+    "name": "Heat Waves",
+    "artist": "Glass Animals",
+    "albumArt": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/da/8b/77/da8b7731-6f4f-eacf-5e74-8b23389eefa1/20UMGIM03371.rgb.jpg/600x600bb.jpg",
+    "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a3/4c/b9/a34cb911-40fc-5f0c-e862-14bd171a77aa/mzaf_384792072030970151.plus.aac.p.m4a",
+    "spotifyUrl": "https://open.spotify.com/search/Heat%20Waves%20Glass%20Animals",
+    "uri": "spotify:track:1508562516"
+  }
+}

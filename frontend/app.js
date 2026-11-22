@@ -62,6 +62,14 @@ function init() {
     loginBtn.addEventListener('click', () => {
         window.location.href = `${API_BASE}/auth/login`;
     });
+
+    const demoBtn = document.getElementById('demo-btn');
+    if (demoBtn) {
+        demoBtn.addEventListener('click', () => {
+            sessionStorage.setItem('spotify_token', 'demo_token');
+            checkAuth();
+        });
+    }
     
     navProfileBtn.addEventListener('click', () => {
         logoutBtn.classList.toggle('hidden');

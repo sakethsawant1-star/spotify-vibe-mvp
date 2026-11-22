@@ -15,6 +15,10 @@ router.post('/', async (req, res, next) => {
     return res.status(400).json({ error: 'Missing trackURIs, playlistName, or accessToken' });
   }
 
+  if (accessToken === 'demo_token') {
+    return res.json({ playlistUrl: '#', playlistId: 'mock_playlist_123', mocked: true });
+  }
+
   try {
     const result = await createPlaylist(trackURIs, playlistName, accessToken);
     res.json(result);
@@ -32,6 +36,10 @@ router.post('/save-track', async (req, res, next) => {
 
   if (!trackId || !accessToken) {
     return res.status(400).json({ error: 'Missing trackId or accessToken' });
+  }
+
+  if (accessToken === 'demo_token') {
+    return res.json({ success: true, mocked: true });
   }
 
   try {
